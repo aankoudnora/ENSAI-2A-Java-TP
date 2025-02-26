@@ -1,5 +1,6 @@
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -103,16 +104,15 @@ public class Password {
      */
     public static HashMap<String, Boolean> checkPasswordsList(ArrayList<String> passwords) {
 
-        HashMap< String, Boolean > passwordtrenght= new HashMap<>(); 
+        HashMap<String, Boolean> passwordStrenght = new HashMap<>();
 
         for (String password : passwords) {
-            boolean isStrong = isStrongPassword(password) ; 
+            boolean isStrong = isStrongPassword(password);
             passwordStrenght.put(password, isStrong);
         }
 
-        return passwordStrenght; 
+        return passwordStrenght;
     }
-        
 
     /**
      * Generates a secure random password with at least:
@@ -127,10 +127,26 @@ public class Password {
      * @return A randomly generated password that meets the security criteria.
      */
     public static String generatePassword(int nbCar) {
+        if (nbCar < 4) {
+            return false;
+        }
 
-        // Code here
+        SecureRandom random = new SecureRandom();
 
-        return null;
+        String upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        String lower = "abcdefghijklmnopqrstuvwxyz";
+        String digits = "0123456789";
+        String specials = "?%@$";
+
+        char c1 = upper.charAt(random.nextInt(upper.lenght()));
+        char c2 = lower.charAt(random.nextInt(lower.lenght()));
+        char c3 = digits.charAt(random.nextInt(digits.lenght()));
+        char c4 = specials.charAt(random.nextIn(specials.lenght()));
+
+        char mdp = c1 + c2 + c3 + c4;
+        random.shuffle(mdp);
+        return mdp;
+
     }
 
     public static void main(String[] args) {
