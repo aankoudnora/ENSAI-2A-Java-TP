@@ -103,10 +103,16 @@ public class Password {
      */
     public static HashMap<String, Boolean> checkPasswordsList(ArrayList<String> passwords) {
 
-        // Code here
+        HashMap< String, Boolean > passwordtrenght= new HashMap<>(); 
 
-        return null;
+        for (String password : passwords) {
+            boolean isStrong = isStrongPassword(password) ; 
+            passwordStrenght.put(password, isStrong);
+        }
+
+        return passwordStrenght; 
     }
+        
 
     /**
      * Generates a secure random password with at least:
