@@ -1,18 +1,23 @@
 package fr.ensai.library;
 
+import java.io.IOException;
+import java.util.List;
+
 public class Main {
 
     public static void main(String[] args) {
+        Library library = new Library();
 
-        Author tolkien = new Author("J.R.R. Tolkien", 81, "UK");
+        String filePath = "books.csv"; 
+        try {
+            library.loadBooksFromFile(filePath);
+        } catch (IOException e) {
+            System.err.println("Erreur lors du chargement des livres : " + e.getMessage());
+        }
 
-        Book fellowshipOfTheRing = new Book(
-                "978-0-618-26025-6",
-                "The Fellowship of the Ring",
-                tolkien,
-                1954,
-                423);
-
-        System.out.println(fellowshipOfTheRing.toString());
+        List<Book> books = library.getBooks();
+        for (Book book : books) {
+            System.out.println(book);
+        }
     }
 }
