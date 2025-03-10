@@ -12,30 +12,30 @@ import java.util.ArrayList;
 public class Library {
     // Attributes
     private String name;
-    private List<Book> books;
+    private List<Item> items;
 
     // Constructor
     public Library(String name) {
         this.name = name;
-        this.books = new ArrayList<>();
+        this.items = new ArrayList<>();
     }
 
-    // Method to add a book to the library's collection
-    public void addBook(Book book) {
-        this.books.add(book);
+    // Method to add an item to the library's collection
+    public void addItem(Item item) {
+        this.items.add(item);
     }
 
-    // Method to display all books in the library
-    public void displayBooks() {
+    // Method to display all items in the library
+    public void displayItems() {
         System.out.println("\n***************************");
         System.out.println("*       All Books         *");
         System.out.println("***************************");
 
-        if (this.books.isEmpty()) {
+        if (this.items.isEmpty()) {
             System.out.println("The library is empty.");
         } else {
-            for (Book book : this.books) {
-                System.out.println(book);
+            for (Item item : this.items) {
+                System.out.println(item);
             }
         }
     }
@@ -79,7 +79,7 @@ public class Library {
                     }
 
                     Book book = new Book(isbn, title, author, year, pageCount);
-                    this.addBook(book);
+                    this.addItem(book);
                 }
             }
         } catch (IOException e) {
