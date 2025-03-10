@@ -10,10 +10,34 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class Library {
-    private List<Item> items;
+    // Attributes
+    private String name;
+    private List<Book> books;
 
-    public Library() {
-        this.items = new ArrayList<>();
+    // Constructor
+    public Library(String name) {
+        this.name = name;
+        this.books = new ArrayList<>();
+    }
+
+    // Method to add a book to the library's collection
+    public void addBook(Book book) {
+        this.books.add(book);
+    }
+
+    // Method to display all books in the library
+    public void displayBooks() {
+        System.out.println("\n***************************");
+        System.out.println("*       All Books         *");
+        System.out.println("***************************");
+
+        if (this.books.isEmpty()) {
+            System.out.println("The library is empty.");
+        } else {
+            for (Book book : this.books) {
+                System.out.println(book);
+            }
+        }
     }
 
     /**
@@ -27,7 +51,7 @@ public class Library {
         URL url = getClass().getClassLoader().getResource(filePath);
 
         if (url == null) {
-            System.err.println("File not found: " + filePath);
+            System.err.println("Error: File not found -> " + filePath);
             return;
         }
 
@@ -46,27 +70,20 @@ public class Library {
                     int year = Integer.parseInt(data[3].trim());
                     int pageCount = Integer.parseInt(data[4].trim());
 
-                    // Check if author already exists in the map
+                    // Check if the author already exists
                     Author author = authors.get(authorName);
                     if (author == null) {
-                        author = new Author(authorName, 0, "Unknown"); // Assuming default values
+                        // Correction : Ajout d'un âge et d'une nationalité par défaut
+                        author = new Author(authorName, 40, "Unknown"); 
                         authors.put(authorName, author);
                     }
-                    Book book = new Book(title, year, pageCount, isbn, author);
-                    this.addItem(book);
+
+                    Book book = new Book(isbn, title, author, year, pageCount);
+                    this.addBook(book);
                 }
             }
         } catch (IOException e) {
             System.err.println("Error reading the file: " + e.getMessage());
         }
-    }
-
-    /**
-     * Adds an item to the library collection.
-     * 
-     * @param item The item to add.
-     */
-    public void addItem(Item item) {
-        items.add(item);
     }
 }
